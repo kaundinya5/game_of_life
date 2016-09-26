@@ -7,8 +7,8 @@ RSpec.configure do |config|
 end
 
 class Cell
-  attr_accessor :x, :y, :world, :alive,:marked,:convert_according_to_mark
-  @convert_according_to_mark = {:stay_dead => Proc.new{|cell| }, :turn_alive => Proc.new {|cell| be_live!} , :stay_alive => Proc.new{|cell| }, :turn_dead => Proc.new{|cell| die!} }
+  attr_accessor :x, :y, :world, :alive,:marked
+  #@convert_according_to_mark = {:stay_dead => Proc.new{|cell| }, :turn_alive => Proc.new {|cell| be_live!} , :stay_alive => Proc.new{|cell| }, :turn_dead => Proc.new{|cell| die!} }
   def initialize(world,alive=true,x=0,y=0)
     @world = world
     @x = x
