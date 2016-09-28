@@ -1,4 +1,4 @@
-#!/usr/bin/ruby
+	#!/usr/bin/ruby
 require 'matrix'
 require_relative 'gol_spec'
 
@@ -19,50 +19,68 @@ class Matrix
 end
 
 # Implementation of the program
-	require 'securerandom'
-	system("clear")
-	puts "Enter the size of the grid"
-	print "Rows = "
-	r = gets.chomp().to_i
-	print "Columns = "
-	c = gets.chomp().to_i
-	world = World.new(r,c)
-	#$grid.to_readable
-	print "Enter the percentage of the grid that you want to be populated: "
-	per = gets.chomp().to_i
-	percent = ((r * c) * per)/100
-	print "The number of cells to be populated is "; p percent
-	cell = Array.new(r*c)
-	i=0;j=0;k=0
-	for i in 0..9
-		for j in 0..9
-			cell[k] = world.populate(false,i,j)
-			k+= 1
-		end
+require 'securerandom'
+system("clear")
+puts "Enter the size of the grid"
+print "Rows = "
+r = gets.chomp().to_i
+print "Columns = "
+c = gets.chomp().to_i
+world = World.new(r,c)
+#$grid.to_readable
+print "Enter the percentage of the grid that you want to be populated: "
+per = gets.chomp().to_i
+percent = ((r * c) * per)/100
+print "The number of cells to be populated is "; p percent
+cell = []
+c.times do
+	cell << Array.new(r)
+end
+i=0;j=0;k=0
+c.times do
+	r.times do
+		cell[i][j] = world.populate(false,i,j)
+		j+= 1
 	end
-	i = 0
-	while i < percent do
-		x = SecureRandom.random_number (r-1)
-		y = SecureRandom.random_number (c-1)
-		cell[i] = world.populate(true,x,y)
-		i+= 1
-	end
-	$grid.to_readable
-	#print world.cells
-	#sleep(5)
+	j=0
+	i+= 1
+end
+i = 0
+while i < percent do
+	x = SecureRandom.random_number (r-1)
+	y = SecureRandom.random_number (c-1)
+	cell[x][y] = world.populate(true,x,y)
+	i+= 1
+end
+puts "Press Enter"
+a = gets.chomp()
+system("clear")
+$grid.to_readable
+#print world.cells
+#sleep(2)
+#a = gets.chomp()
+while 1 do
 	world.tick!
 	i = 0
-	while i < r*c
-		if cell[i].alive?
-			$grid[cell[i].x,cell[i].y] = 1
-		else
-			$grid[cell[i].x,cell[i].y] = "."
+	j = 0
+	c.times do
+		r.times do
+			if cell[i][j].alive?
+				$grid[cell[i][j].x,cell[i][j].y] = "."
+			else
+				$grid[cell[i][j].x,cell[i][j].y] = " "
+			end
+			j+= 1
 		end
+		j = 0
 		i+= 1
 	end
-	print "\n\n\n"
+	a = gets.chomp()
+	system("clear")
+	#print "\n\n\n"
 	$grid.to_readable
-	#world.cells.map { |e| print e.dead?; print " " }
+	#sleep(2)
+end
 
 
 
