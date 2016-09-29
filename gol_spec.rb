@@ -267,7 +267,7 @@ describe 'Game of Life' do
     cell_neighbour = cell.spawns_at(0,1)
     cell_neighbour1 = cell.spawns_at(0,2)
     cell_neighbour2 = cell.spawns_at(-1,0,false)
-    cell_neighbour3 = cell.spawns_at(-1,-1,false)
+    cell_neighbour3 = cell.spawns_at(-1,1,false)
     cell_neighbour4 = cell.spawns_at(-1,2,false)
     cell_neighbour5 = cell.spawns_at(1,0,false)
     cell_neighbour6 = cell.spawns_at(1,1,false)
@@ -276,23 +276,53 @@ describe 'Game of Life' do
     cell.should be_dead
     cell_neighbour.should be_alive
     cell_neighbour1.should be_dead
+    cell_neighbour2.should be_dead
+    cell_neighbour3.should be_alive
+    cell_neighbour4.should be_dead
+    cell_neighbour5.should be_dead
+    cell_neighbour6.should be_alive
+    cell_neighbour7.should be_dead
     world.tick!
     cell.should be_alive
     cell_neighbour.should be_alive
     cell_neighbour1.should be_alive
+    cell_neighbour2.should be_dead
+    cell_neighbour3.should be_dead
+    cell_neighbour4.should be_dead
+    cell_neighbour5.should be_dead
+    cell_neighbour6.should be_dead
+    cell_neighbour7.should be_dead
     world.tick!
     cell.should be_dead
     cell_neighbour.should be_alive
     cell_neighbour1.should be_dead
+    cell_neighbour2.should be_dead
+    cell_neighbour3.should be_alive
+    cell_neighbour4.should be_dead
+    cell_neighbour5.should be_dead
+    cell_neighbour6.should be_alive
+    cell_neighbour7.should be_dead
     world.tick!
     cell.should be_alive
     cell_neighbour.should be_alive
     cell_neighbour1.should be_alive
+    cell_neighbour2.should be_dead
+    cell_neighbour3.should be_dead
+    cell_neighbour4.should be_dead
+    cell_neighbour5.should be_dead
+    cell_neighbour6.should be_dead
+    cell_neighbour7.should be_dead
     world.tick!
     cell.should be_dead
     cell_neighbour.should be_alive
     cell_neighbour1.should be_dead
-    
+    cell_neighbour2.should be_dead
+    cell_neighbour3.should be_alive
+    cell_neighbour4.should be_dead
+    cell_neighbour5.should be_dead
+    cell_neighbour6.should be_alive
+    cell_neighbour7.should be_dead
+   
   end
 
 end 
