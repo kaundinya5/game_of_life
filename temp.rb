@@ -36,11 +36,12 @@ cell = []
 c.times do 
 	cell << Array.new(r)
 end
-i=0;j=0;k=0
-cell[2][4] = world.populate(true,2,4)
+i=0;j=0;k=1
+cell[3][3] = world.populate(true,3,3)
 cell[3][4] = world.populate(true,3,4)
 #cell[2][4] = world.populate(true,2,4)
-cell[4][4] = world.populate(true,4,4)
+cell[3][5] = world.populate(true,3,5)
+#cell[3][6] = world.populate(true,3,6)
 c.times do
 	r.times do
 		if(cell[i][j].is_a?(Cell))
@@ -55,25 +56,11 @@ c.times do
 	j=0
 	i+= 1
 end
-#$grid.to_readable 
-
-=begin
-cell[3][5] = cell[0][0].spawns_at(3,3,false)
-cell[3][5] = cell[0][0].spawns_at(3,5,false)
-cell[2][3] = cell[0][0].spawns_at(2,3,false)
-cell[2][5] = cell[0][0].spawns_at(2,5,false)
-cell[4][3] = cell[0][0].spawns_at(4,3,false)
-cell[4][5] = cell[0][0].spawns_at(4,5,false)
-=end
 puts "Press Enter"
 a = gets.chomp()
 system("clear")
 $grid.to_readable
-
-print cell[2][4].neighbours.count
-print cell[3][4].neighbours.count
-#print cell[2][4].neighbours.count
-print cell[4][4].neighbours.count
+print "Tick 0"
 sleep(2)
 while 1 do
 	world.tick!
@@ -95,9 +82,7 @@ while 1 do
 	system("clear")
 	#print "\n\n"
 	$grid.to_readable
-	print cell[2][4].neighbours.count
-	print cell[3][4].neighbours.count
-	#print cell[2][4].neighbours.count
-	print cell[4][4].neighbours.count
+	print "Tick "; p k;
+	k+=1
 	sleep(2) 
 end

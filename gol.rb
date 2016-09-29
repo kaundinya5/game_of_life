@@ -8,7 +8,7 @@ class Matrix
 	def  to_readable
 		i = 0
 		self.each do |number|
-			print number.to_s + "\t"
+			print number.to_s + " "
 			i+= 1
 			if i == self.column_size
 				print "\n"
@@ -33,32 +33,37 @@ per = gets.chomp().to_i
 percent = ((r * c) * per)/100
 print "The number of cells to be populated is "; p percent
 cell = []
+i = 0
 c.times do
 	cell << Array.new(r)
 end
-i=0;j=0;k=0
-c.times do
-	r.times do
-		cell[i][j] = world.populate(false,i,j)
-		j+= 1
-	end
-	j=0
-	i+= 1
-end
-i = 0
 while i < percent do
 	x = SecureRandom.random_number (r-1)
 	y = SecureRandom.random_number (c-1)
 	cell[x][y] = world.populate(true,x,y)
 	i+= 1
 end
+
+i=0;j=0;k=1
+c.times do
+	r.times do
+		if(cell[i][j].is_a?(Cell))
+			j+=1
+			next
+		else
+			cell[i][j] = world.populate(false,i,j)
+			j+= 1
+		end
+	
+	end
+	j=0
+	i+= 1
+end
 puts "Press Enter"
 a = gets.chomp()
 system("clear")
 $grid.to_readable
-#print world.cells
-#sleep(2)
-#a = gets.chomp()
+print "\nTick 0"
 while 1 do
 	world.tick!
 	i = 0
@@ -75,11 +80,11 @@ while 1 do
 		j = 0
 		i+= 1
 	end
-	a = gets.chomp()
+	sleep(1)
 	system("clear")
-	#print "\n\n\n"
 	$grid.to_readable
-	#sleep(2)
+	print "\nTick "; p k;
+	k+= 1
 end
 
 
