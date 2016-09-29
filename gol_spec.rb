@@ -266,8 +266,12 @@ describe 'Game of Life' do
     cell = world.populate()
     cell_neighbour = cell.spawns_at(0,1)
     cell_neighbour1 = cell.spawns_at(0,2)
-    cell_neighbour2 = cell.spawns_at(-1,1,false)
-    cell_neighbour2 = cell.spawns_at(1,1,false)
+    cell_neighbour2 = cell.spawns_at(-1,0,false)
+    cell_neighbour3 = cell.spawns_at(-1,-1,false)
+    cell_neighbour4 = cell.spawns_at(-1,2,false)
+    cell_neighbour5 = cell.spawns_at(1,0,false)
+    cell_neighbour6 = cell.spawns_at(1,1,false)
+    cell_neighbour7 = cell.spawns_at(1,2,false)
     world.tick!
     cell.should be_dead
     cell_neighbour.should be_alive
