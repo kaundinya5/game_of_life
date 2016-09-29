@@ -83,7 +83,7 @@ while 1 do
 	sleep(1)
 	system("clear")
 	$grid.to_readable
-	print "\nTick "; p k;
+	print "\nTick "; p k
 	k+= 1
 end
 
