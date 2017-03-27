@@ -38,7 +38,7 @@ class Cell
     else
       $grid[@x,@y] = " "
     end
-  end 
+  end
 
   def die!
     @alive=false
@@ -49,69 +49,69 @@ class Cell
   def dead?
     !@alive
   end
-  
+
   def alive?
     @alive
   end
-    
+
   def be_live!
     @alive=true
     @neighbours+= [self]
     self
   end
-  
+
   def neighbours
     @neighbours = []
     world.cells.each do |cell|
       #Detecting the neighbours
-        #North
-        if self.x == cell.x && self.y == cell.y + 1 && cell.alive? 
-          @neighbours << cell
-        end
+      #North
+      if self.x == cell.x && self.y == cell.y + 1 && cell.alive?
+        @neighbours << cell
+      end
 
-        #North East
-        if self.x == cell.x + 1 && self.y == cell.y + 1 && cell.alive?
-          @neighbours << cell
-        end
+      #North East
+      if self.x == cell.x + 1 && self.y == cell.y + 1 && cell.alive?
+        @neighbours << cell
+      end
 
-        #North West
-        if self.x == cell.x - 1 && self.y == cell.y + 1 && cell.alive?
-          @neighbours << cell
-        end
+      #North West
+      if self.x == cell.x - 1 && self.y == cell.y + 1 && cell.alive?
+        @neighbours << cell
+      end
 
-        #South
-        if self.x == cell.x && self.y == cell.y - 1 && cell.alive?
-          @neighbours << cell
-        end
+      #South
+      if self.x == cell.x && self.y == cell.y - 1 && cell.alive?
+        @neighbours << cell
+      end
 
-        #South West
-        if self.x == cell.x - 1 && self.y == cell.y - 1 && cell.alive?
-          @neighbours << cell
-        end
+      #South West
+      if self.x == cell.x - 1 && self.y == cell.y - 1 && cell.alive?
+        @neighbours << cell
+      end
 
-        #South East
-        if self.x == cell.x + 1 && self.y == cell.y - 1 && cell.alive?
-          @neighbours << cell
-        end
+      #South East
+      if self.x == cell.x + 1 && self.y == cell.y - 1 && cell.alive?
+        @neighbours << cell
+      end
 
-        #East
-        if self.x == cell.x - 1 && self.y == cell.y && cell.alive?
-          @neighbours << cell
-        end
+      #East
+      if self.x == cell.x - 1 && self.y == cell.y && cell.alive?
+        @neighbours << cell
+      end
 
-        #West
-        if self.x == cell.x + 1 && self.y == cell.y && cell.alive?
-          @neighbours << cell
-        end
+      #West
+      if self.x == cell.x + 1 && self.y == cell.y && cell.alive?
+        @neighbours << cell
+      end
     end
     @neighbours
   end
 
   def spawns_at(relative_x,relative_y,alive=true)
     #if relative_x.abs <= 1 && relative_y.abs <= 1
-      Cell.new(world,alive,relative_x,relative_y)
+    Cell.new(world,alive,relative_x,relative_y)
     #else
-      #false
+    #false
     #end
   end
 end
@@ -122,7 +122,7 @@ class World
   def initialize(rows,column)
     @cells = []
     #@all_cells = []
-    $grid = Matrix.build(rows,column) {|row,col| "."}
+    $grid = Matrix.build(rows,column) {|row,col| " "}
   end
 
   def populate(alive=true,x=0,y=0)
@@ -131,11 +131,11 @@ class World
   end
 
   def tick!
-   # ObjectSpace.each_object(Cell) do |cell|
-   cells.each do |cell|
+    # ObjectSpace.each_object(Cell) do |cell|
+    cells.each do |cell|
       if cell.neighbours.count < 2 && cell.alive?
         cell.marked = false
-        cell.modified = true   
+        cell.modified = true
       elsif cell.neighbours.count > 3 && cell.alive?
         cell.marked = false
         cell.modified = true
@@ -154,7 +154,7 @@ class World
         cell.be_live!
       end
     end
-        
+
   end
 end
 describe 'Game of Life' do
@@ -162,9 +162,9 @@ describe 'Game of Life' do
   let (:world) { World.new(10,10) }
 
   context "Cell utility methods" do
-     subject {world.populate()}
+    subject {world.populate()}
 
-     it "Spwans relative to" do
+    it "Spwans relative to" do
       cell = subject.spawns_at(4,2)
       cell.is_a?(Cell).should be true
       cell.x = 4
@@ -211,13 +211,13 @@ describe 'Game of Life' do
       cell = subject.spawns_at(-1,0)
       subject.neighbours.count == 1
     end
-    
+
     it "Dies" do
       subject.die!
       subject.alive.should be false
     end
   end
-  
+
   it "Rule 1: Any live cell with fewer than two live neighbours dies, as if caused by under-population." do
     world = World.new(10,10)
     cell = world.populate()
@@ -322,7 +322,7 @@ describe 'Game of Life' do
     cell_neighbour5.should be_dead
     cell_neighbour6.should be_alive
     cell_neighbour7.should be_dead
-   
+
   end
 
-end 
+end

@@ -1,17 +1,17 @@
-	#!/usr/bin/ruby
+#!/usr/bin/ruby
 require 'matrix'
 require_relative 'gol_spec'
-
 class Matrix
 	public "[]=", :set_element, :set_component
 	# Make matrix readable
 	def  to_readable
 		i = 0
+
 		self.each do |number|
 			print number.to_s + " "
 			i+= 1
 			if i == self.column_size
-				print "\n"
+				print  "\n"
 				i = 0
 			end
 		end
@@ -62,6 +62,7 @@ end
 puts "Press Enter"
 a = gets.chomp()
 system("clear")
+print "\n\n\n\n\n\n\n\n\n"
 $grid.to_readable
 print "\nTick 0"
 while 1 do
@@ -80,8 +81,9 @@ while 1 do
 		j = 0
 		i+= 1
 	end
-	sleep(1)
+	sleep(0.5)
 	system("clear")
+	print "\n\n\n\n\n\n\n\n\n"
 	$grid.to_readable
 	print "\nTick "; p k
 	k+= 1
